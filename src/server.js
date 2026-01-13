@@ -1,5 +1,5 @@
 import app from './app.js';
-import './config/database.cjs';
+import './database/index.js';
 
 
 

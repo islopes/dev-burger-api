@@ -1,23 +1,23 @@
-import Sequelize,  { Model } from 'sequelize';
+import Sequelize, { Model } from 'sequelize';
 
 class User extends Model {
-
   static init(sequelize) {
+    Model.init(
+      {
+        name: Sequelize.STRING,        
+        email: Sequelize.STRING,        
+        password_hash: Sequelize.STRING,        
+        admin: Sequelize.BOOLEAN,
+         
+       
+      },
+      {
+        sequelize,
+        tableName: 'users',
+      }
+    );
 
-    super.init({
-        name: sequelize.STRING,
-        email: sequelize.STRING,
-        password_hash: sequelize.STRING,
-        admin: sequelize.BOOLEAN,
-    }, 
-    {
-      sequelize,
-      tableName: 'users',
-
-    },
-);
   }
-
 }
 
 export default User;
