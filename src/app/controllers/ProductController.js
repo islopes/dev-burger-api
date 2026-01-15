@@ -1,4 +1,5 @@
 import * as Yup from 'yup';
+import Product from './../models.Product.js';
 
 
 
@@ -11,12 +12,24 @@ async store(request, response) {
     });
 
      try{
-       schema.validateSync(request.body, {abortEarly: false, strict: true});
+       schema.validateSync(request.body, {abortEarly: false});
       } catch (err) {
         return response.status(400).json({error:  err.errors});
-        
       }
-    return response.status(201).json({ok: true});
+
+      const {name, price, category } = request.body;
+      const {filename} = request.file;
+
+      const newProduct = await Product.create({
+        name,
+        price,
+        category,
+        path: filename,
+      })
+
+      
+
+    return response.status(201).json(newProduct);
     }
 }
 
