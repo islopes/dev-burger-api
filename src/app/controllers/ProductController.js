@@ -1,5 +1,5 @@
 import * as Yup from 'yup';
-import Product from './../models.Product.js';
+import Product from './../models/Product.js';
 
 
 
@@ -17,8 +17,8 @@ async store(request, response) {
         return response.status(400).json({error:  err.errors});
       }
 
-      const {name, price, category } = request.body;
-      const {filename} = request.file;
+      const { name, price, category } = request.body;
+      const { filename } = request.file;
 
       const newProduct = await Product.create({
         name,
@@ -30,6 +30,14 @@ async store(request, response) {
       
 
     return response.status(201).json(newProduct);
+    }
+
+    async index(_request, response) {
+      const products = await Product.findAll();
+
+      console.log(_request.userId);
+
+      return response.status(200).json(products);
     }
 }
 

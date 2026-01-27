@@ -1,15 +1,14 @@
-const multer = require('multer');
+const  multer = require('multer');
 const {resolve} = require('node:path');
 const { v4 } = require('uuid');
 
 module.exports = {
     storage: multer.diskStorage({
-        destination: resolve(__dirname, '..', '..', 'uploads'),
+        destination:resolve(__dirname,'..','..','uploads'),
         filename:(_request, file, callback) => {
-          const uniqueName = v4().concat(`-${file.originalname}`);  
-            return callback(null, uniqueName);
+          const uniqueName = v4().concat(`-${file.originalname}`);
+          return callback(null, uniqueName);
         },
     }),
 };
 
-// C:\Users\igorf\Projetos-Dev\dev-burger-api\uploads
